@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/ui/colors.dart';
 import 'package:movie_app/ui/text_style.dart';
 import 'package:movie_app/ui/reuse_textfield_auth.dart';
+import 'package:movie_app/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -60,6 +61,47 @@ class _LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Email dan password harus diisi!"),
+                          ),
+                        );
+                        return;
+                      }
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      "Sign In",
+                      style: smBold.copyWith(color: Background),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Don't have an account? Sign Up",
+                    style: sRegular.copyWith(color: white),
+                  ),
+                ),
               ],
             ),
           ),
